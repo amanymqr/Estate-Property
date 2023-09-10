@@ -33,7 +33,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('adminassets/css/demo2/style.css') }}">
     <!-- End layout styles -->
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <link rel="shortcut icon" href="{{ asset('adminassets/images/favicon.png') }}" />
 
     <style>
@@ -114,7 +114,29 @@
     <script src="{{ asset('adminassets/vendors/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('adminassets/js/template.js') }}"></script>
     <!-- endinject -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
 
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
 

@@ -19,7 +19,7 @@ class AdminController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/admin/login');
+        return redirect('/admin/login')->with('message', 'Admin Logout successfully')->with('alert-type', 'success');
     }
 
     public function AdminLogin()

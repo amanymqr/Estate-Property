@@ -29,7 +29,7 @@
     <link href="{{ asset('frontendassets/css/switcher-style.css') }}" rel="stylesheet">
     <link href="{{ asset('frontendassets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('frontendassets/css/responsive.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
 
@@ -94,7 +94,31 @@
 
     <!-- main-js -->
     <script src="{{ asset('frontendassets/js/script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
 
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
+    @yield('scripts')
 </body><!-- End of .page_wrapper -->
 
 </html>

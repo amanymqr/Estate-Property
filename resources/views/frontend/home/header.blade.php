@@ -17,9 +17,19 @@
                     <li><a href="index.html"><i class="fab fa-google-plus-g"></i></a></li>
                     <li><a href="index.html"><i class="fab fa-vimeo-v"></i></a></li>
                 </ul>
+
+                @auth
+                    <div class="sign-box">
+                        <a href="{{ route('dashboard') }}"><i class="fas fa-envelope "></i>Dashboard</a>
+                        <a href="{{ route('user.logout') }}"><i class="fas fa-user"></i>Logout</a>
+
+                    </div>
+                @else
                 <div class="sign-box">
-                    <a href="signin.html"><i class="fas fa-user"></i>Sign In</a>
+                    <a href="{{ route('login') }}"><i class="fas fa-user"></i>SignIn</a>
                 </div>
+                @endauth
+
             </div>
         </div>
     </div>
@@ -28,8 +38,8 @@
         <div class="outer-box">
             <div class="main-box">
                 <div class="logo-box">
-                    <figure class="logo"><a href="index.html"><img
-                                src="{{ asset('frontendassets/images/logo.png') }}" alt=""></a>
+                    <figure class="logo"><a href="index.html"><img src="{{ asset('frontendassets/images/logo.png') }}"
+                                alt=""></a>
                     </figure>
                 </div>
                 <div class="menu-area clearfix">
