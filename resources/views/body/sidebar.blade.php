@@ -61,6 +61,30 @@
                 </div>
             </li>
 
+
+
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#property" role="button" aria-expanded="false"
+                    aria-controls="property">
+                    <i class="link-icon" data-feather="feather"></i>
+                    <span class="link-title">Property</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="property">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('property.index') }}" class="nav-link">All Property</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('property.create') }}" class="nav-link">Add Property</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+
             <li class="nav-item">
                 <a href="pages/apps/calendar.html" class="nav-link">
                     <i class="link-icon" data-feather="calendar"></i>

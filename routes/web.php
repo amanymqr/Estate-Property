@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\AmenitiesController;
+use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 
 /*
@@ -62,6 +63,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::resource('propertyType', PropertyTypeController::class);
     Route::resource('amenities', AmenitiesController::class);
+    Route::resource('property', PropertyController::class);
 
 });
 
