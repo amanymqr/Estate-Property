@@ -6,7 +6,7 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('amenities.create') }}" class="btn btn-inverse-info"> Add Property Type </a>
+                <a href="{{ route('amenities.create') }}" class="btn btn-inverse-info"> Add Amenities  </a>
 
             </ol>
         </nav>

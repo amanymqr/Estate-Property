@@ -27,21 +27,23 @@
                                         <th>Property Type </th>
                                         <th>Status Type </th>
                                         <th>City </th>
+                                        <th>Code </th>
                                         <th>Status </th>
                                         <th>Action </th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($property as $key => $property)
+                                    @foreach ($properties as $key => $property)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td><img src="{{ asset($property->property_thambnail) }}"
                                                     style="width:70px; height:40px;"> </td>
                                             <td>{{ $property->property_name }}</td>
-                                            <td>{{ $property->ptype_id }}</td>
+                                            <td>{{ $property->propertyType->type_name }}</td>
                                             <td>{{ $property->property_status }}</td>
                                             <td>{{ $property->city }}</td>
+                                            <td>{{ $property->property_code }}</td>
                                             <td>
                                                 @if ($property->status == 1)
                                                     <span class="badge rounded-pill bg-success">Active</span>
@@ -50,7 +52,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href=""
+                                                <a href="{{ route('property.edit', $property->id) }}"
                                                     class="btn btn-inverse-warning">Edit</a>
 
 

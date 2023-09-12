@@ -22,8 +22,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $property = Property::latest()->get();
-        return view('backend_admin.property.all_property', compact('property'));
+        $properties = Property::with('propertyType')->latest()->get();
+        return view('backend_admin.property.all_property', compact('properties'));
     }
 
     /**
@@ -53,11 +53,11 @@ class PropertyController extends Controller
             'field' => 'property_code',
             'length' => 5,
             'prefix' => 'PC'
-        ]);        $image = $request->file('property_thambnail');
+        ]);
+        $image = $request->file('property_thambnail');
         $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-        $thambnail_url = 'upload/property/thambnail/' . $name_gen;
-        // $image->move('upload/property/thambnail/', $name_gen);
         Image::make($image)->resize(370, 250)->save('upload/property/thambnail/' . $name_gen);
+        $thambnail_url = 'upload/property/thambnail/' . $name_gen;
 
         $property_id = Property::insertGetId([
             'ptype_id' => $request->ptype_id,
@@ -139,15 +139,65 @@ class PropertyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $property = Property::findOrFail($id);
+
+        $type = $property->amenities_id;
+        $property_ami = explode(',', $type);
+
+        // dd($property_ami);
+
+        $propertyType = PropertyType::latest()->get();
+        $amenities = Amenities::latest()->get();
+        $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
+
+        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami'))
+            ->with('message', 'Property added successfully')
+            ->with('alert-type', 'info');
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $amen = $request->amenities_id;
+        $amenites = implode(",", $amen);
+        // $property_id = $request->id;
+
+        Property::findOrFail($id)->update([
+            'ptype_id' => $request->ptype_id,
+            'amenities_id' => $amenites,
+            'property_name' => $request->property_name,
+            'property_slug' => strtolower(str_replace(' ', '-', $request->property_name)),
+            'property_status' => $request->property_status,
+
+            'lowest_price' => $request->lowest_price,
+            'max_price' => $request->max_price,
+            'short_descp' => $request->short_descp,
+            'long_descp' => $request->long_descp,
+            'bedrooms' => $request->bedrooms,
+            'bathrooms' => $request->bathrooms,
+            'garage' => $request->garage,
+            'garage_size' => $request->garage_size,
+
+            'property_size' => $request->property_size,
+            'property_video' => $request->property_video,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+
+            'neighborhood' => $request->neighborhood,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'featured' => $request->featured,
+            'hot' => $request->hot,
+            'agent_id' => $request->agent_id,
+            'updated_at' => Carbon::now(),
+        ]);
+        return redirect()->route('property.index')->with('message', 'Property  edited successfully')
+            ->with('alert-type', 'info');
     }
 
     /**
