@@ -50,11 +50,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('propertyType.edit', $type->id) }}"
+                                                <a href=""
                                                     class="btn btn-inverse-warning">Edit</a>
 
 
-                                                <form method="post" action="{{ route('propertyType.destroy', $type->id) }}"
+                                                <form method="post" action=""
                                                     id="deleteForm" class="d-inline">
                                                     @csrf
                                                     @method('delete')

@@ -10,6 +10,8 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
+    <link rel="stylesheet" href="{{ asset('adminassets/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminassets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <title>@yield('title')</title>
 
@@ -121,7 +123,17 @@
     <!-- End plugin js for this page -->
     <script src="{{ asset('adminassets/js/data-table.js') }}"></script>
 
+    <script src="{{ asset('adminassets/vendors/inputmask/jquery.inputmask.min.js') }}"></script>
+    <script src="{{ asset('adminassets/vendors/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('adminassets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+    <script src="{{ asset('adminassets/vendors/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+    <script src="{{ asset('adminassets/js/inputmask.js') }}"></script>
+    <script src="{{ asset('adminassets/js/select2.js') }}"></script>
+    <script src="{{ asset('adminassets/js/typeahead.js') }}"></script>
+    <script src="{{ asset('adminassets/js/tags-input.js') }}"></script>
 
+    <script src="{{ asset('adminassets/vendors/tinymce/tinymce.min.js ') }}"></script>
+    <script src="{{ asset('adminassets/js/tinymce.js ') }}"></script>
 
 </body>
 
