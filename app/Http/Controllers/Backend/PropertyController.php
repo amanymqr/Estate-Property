@@ -149,8 +149,9 @@ class PropertyController extends Controller
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
+        $facilities = Facility::where('property_id', $id)->get();
 
-        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami', 'multiImage'))
+        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami', 'multiImage', 'facilities'))
             ->with('message', 'Property added successfully')
             ->with('alert-type', 'info');
     }
@@ -198,7 +199,6 @@ class PropertyController extends Controller
                 ]);
             }
         }
-
 
         Property::findOrFail($id)->update([
             'ptype_id' => $request->ptype_id,
@@ -258,22 +258,49 @@ class PropertyController extends Controller
         $new_multi = $request->imageid;
         if ($request->hasFile('multi_img')) {
 
-        $image = $request->file('multi_img');
+            $image = $request->file('multi_img');
 
-        $make_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-        Image::make($image)->resize(770, 520)->save('upload/property/multi-image/' . $make_name);
-        $uploadPath = 'upload/property/multi-image/' . $make_name;
+            $make_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(770, 520)->save('upload/property/multi-image/' . $make_name);
+            $uploadPath = 'upload/property/multi-image/' . $make_name;
 
-        MultiImage::insert([
-            'property_id' => $new_multi,
-            'photo_name' => $uploadPath,
-            'created_at' => Carbon::now(),
-        ]);
-    } else {
-        return redirect()->back()->with('message', 'image added successfully.')->with('alert-type', 'success');
-    } // End Method
+            MultiImage::insert([
+                'property_id' => $new_multi,
+                'photo_name' => $uploadPath,
+                'created_at' => Carbon::now(),
+            ]);
+        } else {
+            return redirect()->back()->with('message', 'image added successfully.')->with('alert-type', 'success');
+        } // End Method
     }
 
+
+    public function UpdatePropertyFacilities(Request $request)
+{
+    $property_id = $request->id;
+
+    if ($request->facility_name == NULL) {
+        return redirect()->back();
+    } else {
+        // First, delete existing facilities for the property
+        Facility::where('property_id', $property_id)->delete();
+
+        // Now, insert the updated facilities
+        $facilities = $request->facility_name;
+        $distances = $request->distance;
+
+        foreach ($facilities as $index => $facility) {
+            $fcount = new Facility();
+            $fcount->property_id = $property_id;
+            $fcount->facility_name = $facility;
+            $fcount->distance = $distances[$index];
+            $fcount->save();
+        }
+    }
+
+    return redirect()->back()->with('message', 'Facility updated successfully.')->with('alert-type', 'success');
+}
+ // End Method
     // End Method
     /**
      * Remove the specified resource from storage.

@@ -398,7 +398,6 @@
     <!--========== End of add multiple class with ajax ==============-->
 @section('scripts')
 
-    <!----For Section-------->
     <script type="text/javascript">
         $(document).ready(function() {
             var counter = 0;
