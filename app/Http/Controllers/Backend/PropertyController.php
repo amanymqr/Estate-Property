@@ -140,7 +140,7 @@ class PropertyController extends Controller
     public function edit(string $id)
     {
         $property = Property::findOrFail($id);
-
+        $multiImage = MultiImage::where('property_id', $id)->get();
         $type = $property->amenities_id;
         $property_ami = explode(',', $type);
 
@@ -150,7 +150,7 @@ class PropertyController extends Controller
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
 
-        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami'))
+        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami', 'multiImage'))
             ->with('message', 'Property added successfully')
             ->with('alert-type', 'info');
     }
@@ -163,7 +163,42 @@ class PropertyController extends Controller
     {
         $amen = $request->amenities_id;
         $amenites = implode(",", $amen);
-        // $property_id = $request->id;
+
+        $property_id = $request->id;
+        $old_img = $request->old_img;
+        if ($request->hasFile('property_thambnail')) {
+            $image = $request->file('property_thambnail');
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(370, 250)->save('upload/property/thambnail/' . $name_gen);
+            $thambnail_url = 'upload/property/thambnail/' . $name_gen;
+
+            // Delete the old thumbnail image
+            if (file_exists($old_img)) {
+                unlink($old_img);
+            }
+        } else {
+            // If no new image is uploaded, retain the existing thumbnail URL
+            $thambnail_url = $old_img;
+        }
+
+
+        $imgs = $request->multi_img;
+        if (!empty($imgs)) {
+            foreach ($imgs as $id => $img) {
+                $imgDel = MultiImage::findOrFail($id);
+                unlink($imgDel->photo_name);
+
+                $multiImg_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
+                Image::make($img)->resize(770, 520)->save('upload/property/multi-image/' . $multiImg_name);
+                $uploadPath = 'upload/property/multi-image/' . $multiImg_name;
+
+                MultiImage::where('id', $id)->update([
+                    'photo_name' => $uploadPath,
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+        }
+
 
         Property::findOrFail($id)->update([
             'ptype_id' => $request->ptype_id,
@@ -194,12 +229,52 @@ class PropertyController extends Controller
             'featured' => $request->featured,
             'hot' => $request->hot,
             'agent_id' => $request->agent_id,
+            'property_thambnail' => $thambnail_url,
             'updated_at' => Carbon::now(),
         ]);
         return redirect()->route('property.index')->with('message', 'Property  edited successfully')
             ->with('alert-type', 'info');
     }
 
+
+
+    public function deleteMultiImage($id, $multiId)
+    {
+        $multiImage = MultiImage::find($multiId);
+        if (!$multiImage) {
+            return redirect()->back()->with('message', 'Multi-image not found.')->with('alert-type', 'error');
+        }
+        if (file_exists($multiImage->photo_name)) {
+            unlink($multiImage->photo_name);
+        }
+        $multiImage->delete();
+        return redirect()->back()->with('message', 'Multi-image deleted successfully.')->with('alert-type', 'success');
+    }
+
+
+    public function StoreNewMultiimage(Request $request)
+    {
+
+        $new_multi = $request->imageid;
+        if ($request->hasFile('multi_img')) {
+
+        $image = $request->file('multi_img');
+
+        $make_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        Image::make($image)->resize(770, 520)->save('upload/property/multi-image/' . $make_name);
+        $uploadPath = 'upload/property/multi-image/' . $make_name;
+
+        MultiImage::insert([
+            'property_id' => $new_multi,
+            'photo_name' => $uploadPath,
+            'created_at' => Carbon::now(),
+        ]);
+    } else {
+        return redirect()->back()->with('message', 'image added successfully.')->with('alert-type', 'success');
+    } // End Method
+    }
+
+    // End Method
     /**
      * Remove the specified resource from storage.
      */

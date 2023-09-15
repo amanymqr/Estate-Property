@@ -64,6 +64,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::resource('propertyType', PropertyTypeController::class);
     Route::resource('amenities', AmenitiesController::class);
     Route::resource('property', PropertyController::class);
+    Route::get('/property/{id}/multiimg/delete/{multiId}', [PropertyController::class, 'deleteMultiImage'])->name('property.multiimg.delete');
+    Route::post('/store/new/multiimage',[PropertyController::class,'StoreNewMultiimage'])->name('store.new.multiimage');
+
 
 });
 
