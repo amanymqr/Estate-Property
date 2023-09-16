@@ -52,15 +52,17 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('property.edit', $property->id) }}"
-                                                    class="btn btn-inverse-warning">Edit</a>
+                                                <a href="{{ route('property.show', $property->id) }}"
+                                                    class="btn btn-inverse-info "><i data-feather="eye"></i></a>
 
+                                                    <a href="{{ route('property.edit', $property->id) }}"
+                                                        class="btn btn-inverse-warning "><i data-feather="edit"></i></a>
 
-                                                <form method="post" action=""
+                                                <form method="post" action="{{ route('property.destroy' ,$property->id) }}"
                                                     id="deleteForm" class="d-inline">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-inverse-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-inverse-danger "><i data-feather="trash"></i></button>
 
                                                 </form>
 

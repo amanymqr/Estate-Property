@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\AmenitiesController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,13 +66,13 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::resource('amenities', AmenitiesController::class);
     Route::resource('property', PropertyController::class);
     Route::get('/property/{id}/multiimg/delete/{multiId}', [PropertyController::class, 'deleteMultiImage'])->name('property.multiimg.delete');
-    Route::post('/store/new/multiimage',[PropertyController::class,'StoreNewMultiimage'])->name('store.new.multiimage');
-    Route::post('/update/property/facilities', [PropertyController::class,'UpdatePropertyFacilities'])->name('update.property.facilities');
-
-
+    Route::post('/store/new/multiimage', [PropertyController::class, 'StoreNewMultiimage'])->name('store.new.multiimage');
+    Route::post('/update/property/facilities', [PropertyController::class, 'UpdatePropertyFacilities'])->name('update.property.facilities');
+    Route::post('/inactive/property', [PropertyController::class, 'InactiveProperty'])->name('property.inactive');
+    Route::post('/active/property', [PropertyController::class, 'ActiveProperty'])->name('property.active');
 });
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 
 

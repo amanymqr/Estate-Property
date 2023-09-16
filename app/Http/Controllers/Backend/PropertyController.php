@@ -131,7 +131,19 @@ class PropertyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $facilities = Facility::where('property_id', $id)->get();
+        $property = Property::findOrFail($id);
+
+        $type = $property->amenities_id;
+        $property_ami = explode(',', $type);
+
+        $multiImage = MultiImage::where('property_id', $id)->get();
+
+        $propertytype = PropertyType::latest()->get();
+        $amenities = Amenities::latest()->get();
+        $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
+
+        return view('backend_admin.property.show_property', compact('property', 'propertytype', 'amenities', 'activeAgent', 'property_ami', 'multiImage', 'facilities'));
     }
 
     /**
@@ -276,37 +288,73 @@ class PropertyController extends Controller
 
 
     public function UpdatePropertyFacilities(Request $request)
-{
-    $property_id = $request->id;
+    {
+        $property_id = $request->id;
 
-    if ($request->facility_name == NULL) {
-        return redirect()->back();
-    } else {
-        // First, delete existing facilities for the property
-        Facility::where('property_id', $property_id)->delete();
+        if ($request->facility_name == NULL) {
+            return redirect()->back();
+        } else {
+            // First, delete existing facilities for the property
+            Facility::where('property_id', $property_id)->delete();
 
-        // Now, insert the updated facilities
-        $facilities = $request->facility_name;
-        $distances = $request->distance;
+            // Now, insert the updated facilities
+            $facilities = $request->facility_name;
+            $distances = $request->distance;
 
-        foreach ($facilities as $index => $facility) {
-            $fcount = new Facility();
-            $fcount->property_id = $property_id;
-            $fcount->facility_name = $facility;
-            $fcount->distance = $distances[$index];
-            $fcount->save();
+            foreach ($facilities as $index => $facility) {
+                $fcount = new Facility();
+                $fcount->property_id = $property_id;
+                $fcount->facility_name = $facility;
+                $fcount->distance = $distances[$index];
+                $fcount->save();
+            }
         }
-    }
 
-    return redirect()->back()->with('message', 'Facility updated successfully.')->with('alert-type', 'success');
-}
- // End Method
+        return redirect()->back()->with('message', 'Facility updated successfully.')->with('alert-type', 'success');
+    }
+    // End Method
     // End Method
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(string $id)
     {
-        //
+        $property = Property::findOrFail($id);
+        unlink($property->property_thambnail);
+        Property::findOrFail($id)->delete();
+        $image = MultiImage::where('property_id', $id)->get();
+        foreach ($image as $img) {
+            unlink($img->photo_name);
+            MultiImage::where('property_id', $id)->delete();
+        }
+        $facilitiesData = Facility::where('property_id', $id)->get();
+        foreach ($facilitiesData as $item) {
+            $item->facility_name;
+            Facility::where('property_id', $id)->delete();
+        }
+        return redirect()->back()->with('message', 'Property deleted successfully.')->with('alert-type', 'success');
+    }
+
+
+
+
+    public function InactiveProperty(Request $request)
+    {
+        $pid = $request->id;
+        Property::findOrFail($pid)->update([
+            'status' => 0,
+        ]);
+        return redirect()->route('property.index')->with('message', 'Property Status inactive successfully.')->with('alert-type', 'success');
+    }
+
+
+    public function ActiveProperty(Request $request)
+    {
+        $pid = $request->id;
+        Property::findOrFail($pid)->update([
+            'status' => 1,
+        ]);
+        return redirect()->route('property.index')->with('message', 'Property Status active successfully.')->with('alert-type', 'success');
     }
 }
