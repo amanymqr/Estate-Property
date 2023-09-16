@@ -48,14 +48,14 @@
 
 <body>
     <div class="main-wrapper">
-        @include('body.sidebar')
+        @include('admin.body.sidebar')
         <div class="page-wrapper">
 
-            @include('body.header')
+            @include('admin.body.header')
 
             @yield('content')
 
-            @include('body.footer')
+            @include('admin.body.footer')
 
 
         </div>
