@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+@extends('agent.agent_dashboard')
 @section('title', 'All Property ')
 @section('content')
 
@@ -7,7 +7,7 @@
 
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('property.create') }}" class="btn btn-inverse-info"> Add Property </a>
+                <a href="{{ route('agent_property.create') }}" class="btn btn-inverse-info"> Add Property </a>
 
             </ol>
         </nav>
@@ -34,9 +34,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (!empty($properties))
+
                                     @foreach ($properties as $key => $property)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
+
                                             <td><img src="{{ asset($property->property_thambnail) }}"
                                                     style="width:70px; height:40px;"> </td>
                                             <td>{{ $property->property_name }}</td>
@@ -53,13 +56,13 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('property.show', $property->id) }}"
+                                                <a href="{{ route('agent_property.show', $property->id) }}"
                                                     class="btn btn-inverse-info "><i data-feather="eye"></i></a>
 
-                                                    <a href="{{ route('property.edit', $property->id) }}"
+                                                    <a href="{{ route('agent_property.edit', $property->id) }}"
                                                         class="btn btn-inverse-warning "><i data-feather="edit"></i></a>
 
-                                                <form method="post" action="{{ route('property.destroy' ,$property->id) }}"
+                                                <form method="post" action="{{ route('agent_property.destroy' ,$property->id) }}"
                                                     id="deleteForm" class="d-inline">
                                                     @csrf
                                                     @method('delete')
@@ -73,7 +76,9 @@
 
                                         </tr>
                                     @endforeach
-
+                                    @else
+                                    <p>No properties found.</p>
+                                @endif
 
                                 </tbody>
                             </table>

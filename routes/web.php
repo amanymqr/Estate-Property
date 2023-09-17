@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
 use App\Http\Controllers\ProfileController;
@@ -81,6 +82,14 @@ Route::middleware('auth', 'role:agent')->group(function () {
     Route::post('/agent/store', [AgentController::class, 'AgentProfileStore'])->name('agent.profile.store');
     Route::get('/agent/change/password', [AgentController::class, 'AgentChangePassword'])->name('agent.change.password');
     Route::post('/agent/update/password', [AgentController::class, 'AgentUpdatePassword'])->name('agent.update.password');
+    Route::resource('agent_property', AgentPropertyController::class);
+
+    Route::get('/property/{id}/multiimg/delete/{multiId}', [AgentPropertyController::class, 'AgentPropertyDeleteMultiImage'])->name('agent.property.multiimg.delete');
+
+
+    Route::post('/agent/store/new/multiimage', [AgentPropertyController::class, 'AgentPropertyStoreNewMultiimage'])->name('agent.store.new.multiimage');
+
+    Route::post('/agent/update/property/facilities', [AgentPropertyController::class, 'AgentUpdatePropertyFacilities'])->name('agent.update.property.facilities');
 });
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');

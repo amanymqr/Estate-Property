@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+@extends('agent.agent_dashboard')
 @section('title', 'Add Property ')
 @section('content')
     <div class="page-content">
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">Add Property </h6>
-                            <form method="POST" action="{{ route('property.store') }}" enctype="multipart/form-data"
+                            <form method="POST" action="{{ route('agent_property.store') }}" enctype="multipart/form-data"
                                 id="myForm" class="forms-sample">
                                 @csrf
                                 <div class="row">
@@ -262,19 +262,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
-                                            <div class="mb-3">
-                                                <label class="form-label"> Agent </label>
-                                                <select name="agent_id" class="form-select"
-                                                    id="exampleFormControlSelect1">
-                                                    <option selected="" disabled="">Select Status</option>
-                                                    @foreach ($activeAgent as $activeAgent)
-                                                        <option value="{{ $activeAgent->id }}">{{ $activeAgent->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+
                                         <div class="col-sm-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Short Descrition</label>

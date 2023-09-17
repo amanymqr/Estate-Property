@@ -39,10 +39,10 @@ $status = $agentId->status;
                 <div class="collapse" id="types">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="" class="nav-link">All Type</a>
+                            <a href="{{ route('agent_property.index') }}" class="nav-link">All Type</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">Add Type</a>
+                            <a href="{{ route('agent_property.create') }}" class="nav-link">Add Type</a>
                         </li>
 
                     </ul>

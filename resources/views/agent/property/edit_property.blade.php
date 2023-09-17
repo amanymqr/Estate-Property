@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+@extends('agent.agent_dashboard')
 @section('title', 'Add Property ')
 @section('content')
     <div class="page-content">
@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">Edit Property </h6>
-                            <form method="POST" action="{{ route('property.update', ['property' => $property->id]) }}"
+                            <form method="POST" action="{{ route('agent_property.update',  $property->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -206,26 +206,13 @@
                                                 @foreach ($amenities as $amenities)
                                                     <option value="{{ $amenities->amenities_name }}"
                                                         {{ in_array($amenities->amenities_name, $property_ami) ? 'selected' : '' }}>
-                                                        {{ $amenities->amenities_name }}</option>
+                                                        {{ $amenities->amenitis_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4">
-                                        <div class="mb-3">
-                                            <label class="form-label">Agent</label>
-                                            <select name="agent_id" class="form-select" id="exampleFormControlSelect1">
-                                                <option disabled>Select Agent</option>
-                                                @foreach ($activeAgent as $agent)
-                                                    <option value="{{ $agent->id }}"
-                                                        {{ $agent->id == $property->agent_id ? 'selected' : '' }}>
-                                                        {{ $agent->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+
 
                                     <div class="col-sm-12">
                                         <div class="mb-3">
@@ -328,7 +315,7 @@
                                                                         <div class="image-container" id="deleteForm">
                                                                             {{--  <img src="{{ asset($img->photo_name) }}"
                                                                                 alt="Multi-image">  --}}
-                                                                            <a href="{{ route('property.multiimg.delete', ['id' => $property->id, 'multiId' => $img->id]) }}"
+                                                                            <a href="{{ route('agent.property.multiimg.delete', ['id' => $property->id, 'multiId' => $img->id]) }}"
                                                                                 class="btn btn-danger">Delete</a>
                                                                         </div>
 
@@ -354,7 +341,7 @@
 
                             {{--  multiimage  --}}
                             <form method="post"
-                                action="{{ route('store.new.multiimage', ['property' => $property->id]) }}"
+                                action="{{ route('agent.store.new.multiimage', $property->id ) }}"
                                 id="myForm" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="imageid" value="{{ $property->id }}">
@@ -389,7 +376,7 @@
 
 
                                                     <form method="post"
-                                                        action="{{ route('update.property.facilities') }}" id="myForm"
+                                                        action="{{ route('agent.update.property.facilities') }}" id="myForm"
                                                         enctype="multipart/form-data">
                                                         @csrf
 
