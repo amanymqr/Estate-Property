@@ -6,10 +6,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Backend\AmenitiesController;
-use App\Http\Controllers\Backend\PropertyController;
-use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\ManageAgentController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Backend\PropertyController;
+use App\Http\Controllers\Backend\AmenitiesController;
+use App\Http\Controllers\Backend\PropertyTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,12 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::post('/update/property/facilities', [PropertyController::class, 'UpdatePropertyFacilities'])->name('update.property.facilities');
     Route::post('/inactive/property', [PropertyController::class, 'InactiveProperty'])->name('property.inactive');
     Route::post('/active/property', [PropertyController::class, 'ActiveProperty'])->name('property.active');
+
+    //Manage Agent from Admin
+    Route::resource('manage_agent', ManageAgentController::class);
+    Route::get('/changeStatus', [ManageAgentController::class,'changeStatus']);
+
+
 });
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
