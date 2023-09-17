@@ -322,4 +322,10 @@ class AgentPropertyController extends Controller
         }
         return redirect()->back()->with('message', 'Property deleted successfully.')->with('alert-type', 'success');
     }
+
+
+    public function BuyPackage(){
+
+        return view('agent.package.buy_package');
+    }
 }

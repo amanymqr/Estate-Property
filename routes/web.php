@@ -90,6 +90,9 @@ Route::middleware('auth', 'role:agent')->group(function () {
     Route::post('/agent/store/new/multiimage', [AgentPropertyController::class, 'AgentPropertyStoreNewMultiimage'])->name('agent.store.new.multiimage');
 
     Route::post('/agent/update/property/facilities', [AgentPropertyController::class, 'AgentUpdatePropertyFacilities'])->name('agent.update.property.facilities');
+
+    Route::get('/buy/package', [AgentPropertyController::class,'BuyPackage'])->name('buy.package');
+
 });
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');

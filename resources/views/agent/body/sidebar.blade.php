@@ -1,7 +1,7 @@
 @php
-$id = Auth::user()->id;
-$agentId = App\Models\User::find($id);
-$status = $agentId->status;
+    $id = Auth::user()->id;
+    $agentId = App\Models\User::find($id);
+    $status = $agentId->status;
 @endphp
 
 <!-- partial:partials/_sidebar.html -->
@@ -27,31 +27,37 @@ $status = $agentId->status;
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
-            @if($status === 'active')
-            <li class="nav-item nav-category">Real Estate</li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#types" role="button" aria-expanded="false"
-                    aria-controls="types">
-                    <i class="link-icon" data-feather="feather"></i>
-                    <span class="link-title">Property Type</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                </a>
-                <div class="collapse" id="types">
-                    <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="{{ route('agent_property.index') }}" class="nav-link">All Type</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('agent_property.create') }}" class="nav-link">Add Type</a>
-                        </li>
+            @if ($status === 'active')
+                <li class="nav-item nav-category">Real Estate</li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#types" role="button" aria-expanded="false"
+                        aria-controls="types">
+                        <i class="link-icon" data-feather="feather"></i>
+                        <span class="link-title">Property Type</span>
+                        <i class="link-arrow" data-feather="chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="types">
+                        <ul class="nav sub-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('agent_property.index') }}" class="nav-link">All Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('agent_property.create') }}" class="nav-link">Add Type</a>
+                            </li>
 
-                    </ul>
-                </div>
-            </li>
+                        </ul>
+                    </div>
+                </li>
 
-@else
 
-@endif
+                <li class="nav-item">
+                    <a href="{{ route('buy.package') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Buy Package</span>
+                    </a>
+                </li>
+            @else
+            @endif
 
 
 
