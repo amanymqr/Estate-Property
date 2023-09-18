@@ -38,7 +38,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td><img src="{{ asset($property->property_thambnail) }}"
-                                                    style="width:70px; height:40px;"> </td>
+                                                    style="width:50px; height:40px;"> </td>
                                             <td>{{ $property->property_name }}</td>
                                             <td>{{ $property->propertyType->type_name }}</td>
                                             <td>{{ $property->property_status }}</td>

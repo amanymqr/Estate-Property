@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Agent;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\Amenities;
 use App\Models\MultiImage;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -33,7 +36,17 @@ class AgentPropertyController extends Controller
     {
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
-        return view('agent.property.add_pproperty', compact('propertyType', 'amenities'));
+
+        $id = Auth::user()->id;
+        $property = User::where('role', 'agent')->where('id', $id)->first();
+        $pcount = $property->credits;
+        // dd($pcount);
+
+        if ($pcount == 1 || $pcount == 7) {
+            return redirect()->route('buy.package');
+        } else {
+            return view('agent.property.add_pproperty', compact('propertyType', 'amenities'));
+        }
     }
 
     /**
@@ -41,6 +54,11 @@ class AgentPropertyController extends Controller
      */
     public function store(Request $request)
     {
+        $id = Auth::user()->id;
+        $user_id = User::findOrFail($id);
+        $nid = $user_id->credits;
+
+
         $validator = $request->validate([
             'property_name' => 'required|string|max:255',
         ]);
@@ -119,6 +137,10 @@ class AgentPropertyController extends Controller
                 $fcount->save();
             }
         }
+        User::where('id', $id)->update([
+            'credits' => DB::raw('1 + ' . $nid),
+        ]);
+
 
         return redirect()->route('agent_property.index')->with('message', 'Property  added successfully')
             ->with('alert-type', 'success');
@@ -324,8 +346,4 @@ class AgentPropertyController extends Controller
     }
 
 
-    public function BuyPackage(){
-
-        return view('agent.package.buy_package');
-    }
 }

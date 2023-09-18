@@ -41,7 +41,7 @@
                                             <td>{{ $key + 1 }}</td>
 
                                             <td><img src="{{ asset($property->property_thambnail) }}"
-                                                    style="width:70px; height:40px;"> </td>
+                                                    style="width:50px; height:40px;"> </td>
                                             <td>{{ $property->property_name }}</td>
                                             <td>{{ $property->propertyType->type_name }}</td>
                                             <td>{{ $property->property_status }}</td>
@@ -57,16 +57,16 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('agent_property.show', $property->id) }}"
-                                                    class="btn btn-inverse-info "><i data-feather="eye"></i></a>
+                                                    class="btn text-info "><i data-feather="eye"></i></a>
 
                                                     <a href="{{ route('agent_property.edit', $property->id) }}"
-                                                        class="btn btn-inverse-warning "><i data-feather="edit"></i></a>
+                                                        class="btn text-warning "><i data-feather="edit"></i></a>
 
                                                 <form method="post" action="{{ route('agent_property.destroy' ,$property->id) }}"
                                                     id="deleteForm" class="d-inline">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-inverse-danger "><i data-feather="trash"></i></button>
+                                                    <button type="submit" class="btn text-danger "><i data-feather="trash"></i></button>
 
                                                 </form>
 
