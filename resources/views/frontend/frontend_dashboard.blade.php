@@ -91,6 +91,10 @@
     <script src="{{ asset('frontendassets/js/jQuery.style.switcher.min.js') }}"></script>
     <script src="{{ asset('frontendassets/js/jquery-ui.js') }}"></script>
     <script src="{{ asset('frontendassets/js/nav-tool.js') }}"></script>
+    <!-- map script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="{{ asset('frontendassets/js/gmaps.js') }}"></script>
+    <script src="{{ asset('frontendassets/js/map-helper.js') }}"></script>
 
     <!-- main-js -->
     <script src="{{ asset('frontendassets/js/script.js') }}"></script>

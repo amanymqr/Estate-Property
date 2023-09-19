@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Property;
+use App\Models\PropertyType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $property_type = PropertyType::latest()->limit(5)->get();
+        $property_feature = Property::where('status','1')->where('featured','1')->limit(3)->get();
+
+        return view('frontend.index' , compact('property_type' , 'property_feature' ));
     }
 
 

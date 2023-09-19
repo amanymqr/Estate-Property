@@ -328,7 +328,7 @@
                                                                         <div class="image-container" id="deleteForm">
                                                                             {{--  <img src="{{ asset($img->photo_name) }}"
                                                                                 alt="Multi-image">  --}}
-                                                                            <a href="{{ route('property.multiimg.delete', ['id' => $property->id, 'multiId' => $img->id]) }}"
+                                                                            <a href="{{ route('admin.multiImg.delete',[ $property->id,  $img->id] ) }}"
                                                                                 class="btn btn-danger">Delete</a>
                                                                         </div>
 

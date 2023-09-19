@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\AmenitiesController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\HomePropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,6 @@ use App\Http\Controllers\Backend\PropertyTypeController;
 */
 
 
-
-//user front-end all routs
-Route::get('/', [UserController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -58,8 +56,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
     Route::resource('propertyType', PropertyTypeController::class);
     Route::resource('amenities', AmenitiesController::class);
+
     Route::resource('property', PropertyController::class);
-    Route::get('/property/{id}/multiimg/delete/{multiId}', [PropertyController::class, 'deleteMultiImage'])->name('property.multiimg.delete');
+    Route::get('/admin/property/{id}/multiimg/delete/{multiId}', [PropertyController::class, 'deleteMultiImage'])->name('admin.multiImg.delete');
+
     Route::post('/store/new/multiimage', [PropertyController::class, 'StoreNewMultiimage'])->name('store.new.multiimage');
     Route::post('/update/property/facilities', [PropertyController::class, 'UpdatePropertyFacilities'])->name('update.property.facilities');
     Route::post('/inactive/property', [PropertyController::class, 'InactiveProperty'])->name('property.inactive');
@@ -67,12 +67,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     //Manage Agent from Admin
     Route::resource('manage_agent', ManageAgentController::class);
-    Route::get('/changeStatus', [ManageAgentController::class,'changeStatus']);
+    Route::get('/changeStatus', [ManageAgentController::class, 'changeStatus']);
 
-    Route::get('/admin/package/history', [AdminPackageController::class ,'AdminPackageHistory'])->name('admin.package.history');
-    Route::get('admin/package/invoice/{id}', [AdminPackageController::class ,'AdminPackageInvoice'])->name('admin.package.invoice');
-
-
+    Route::get('/admin/package/history', [AdminPackageController::class, 'AdminPackageHistory'])->name('admin.package.history');
+    Route::get('admin/package/invoice/{id}', [AdminPackageController::class, 'AdminPackageInvoice'])->name('admin.package.invoice');
 });
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
@@ -95,19 +93,22 @@ Route::middleware('auth', 'role:agent')->group(function () {
 
     Route::post('/agent/update/property/facilities', [AgentPropertyController::class, 'AgentUpdatePropertyFacilities'])->name('agent.update.property.facilities');
 
-    Route::get('/buy/package', [PackageController::class,'BuyPackage'])->name('buy.package');
-    Route::get('/buy/business/plan', [PackageController::class,'BuyBusinessPlan'])->name('buy.business.plan');
-    Route::post('/store/business/plan', [PackageController::class,'StoreBusinessPlan'])->name('store.business.plan');
-    Route::get('/buy/professional/plan', [PackageController::class,'BuyProfessionalPlan'])->name('buy.professional.plan');
-    Route::post('/store/professional/plan', [PackageController::class,'StoreProfessionalPlan'])->name('store.professional.plan');
-    Route::get('/package/history', [PackageController::class,'PackageHistory'])->name('package.history');
-    Route::get('/agent/package/invoice/{id}', [PackageController::class ,'AgentPackageInvoice'])->name('agent.package.invoice');
-
-
+    Route::get('/buy/package', [PackageController::class, 'BuyPackage'])->name('buy.package');
+    Route::get('/buy/business/plan', [PackageController::class, 'BuyBusinessPlan'])->name('buy.business.plan');
+    Route::post('/store/business/plan', [PackageController::class, 'StoreBusinessPlan'])->name('store.business.plan');
+    Route::get('/buy/professional/plan', [PackageController::class, 'BuyProfessionalPlan'])->name('buy.professional.plan');
+    Route::post('/store/professional/plan', [PackageController::class, 'StoreProfessionalPlan'])->name('store.professional.plan');
+    Route::get('/package/history', [PackageController::class, 'PackageHistory'])->name('package.history');
+    Route::get('/agent/package/invoice/{id}', [PackageController::class, 'AgentPackageInvoice'])->name('agent.package.invoice');
 });
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');
 
+
+
+//user front-end all routs
+Route::get('/', [UserController::class, 'index']);
+Route::get('/property/details/{id}/{slug}', [HomePropertyController::class, 'PropertyDetails']);
 
 
 
