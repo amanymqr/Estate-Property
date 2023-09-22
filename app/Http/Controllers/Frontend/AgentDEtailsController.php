@@ -50,7 +50,7 @@ class AgentDEtailsController extends Controller
     }
 
     public function RentProperty(){
-        $property = Property::where('status','1')->where('property_status','rent')->get();
+        $property = Property::where('status','1')->where('property_status','rent')->paginate(1);
         return view('frontend.property.rent_property',compact('property'));
     }
 
