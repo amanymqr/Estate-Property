@@ -9,14 +9,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ManageAgentController;
 use App\Http\Controllers\HomePropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Agent\PackageController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Backend\AmenitiesController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Agent\AgentMessageController;
 use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Frontend\AgentDEtailsController;
+use App\Http\Controllers\Frontend\AgentPropertyTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +77,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('/admin/package/history', [AdminPackageController::class, 'AdminPackageHistory'])->name('admin.package.history');
     Route::get('admin/package/invoice/{id}', [AdminPackageController::class, 'AdminPackageInvoice'])->name('admin.package.invoice');
+
+    Route::get('/admin/property/message/', [MessageController::class,'AdminPropertyMessage'])->name('admin.property.message');
+
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
@@ -80,7 +87,7 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 
 
 
-//Agent Admin Middelware
+//Agent  Middelware
 Route::middleware('auth', 'role:agent')->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
     Route::get('/agent/logout', [AgentController::class, 'AgentLogout'])->name('agent.logout');
@@ -91,9 +98,7 @@ Route::middleware('auth', 'role:agent')->group(function () {
     Route::resource('agent_property', AgentPropertyController::class);
 
     Route::get('/property/{id}/multiimg/delete/{multiId}', [AgentPropertyController::class, 'AgentPropertyDeleteMultiImage'])->name('agent.property.multiimg.delete');
-
     Route::post('/agent/store/new/multiimage', [AgentPropertyController::class, 'AgentPropertyStoreNewMultiimage'])->name('agent.store.new.multiimage');
-
     Route::post('/agent/update/property/facilities', [AgentPropertyController::class, 'AgentUpdatePropertyFacilities'])->name('agent.update.property.facilities');
 
     Route::get('/buy/package', [PackageController::class, 'BuyPackage'])->name('buy.package');
@@ -103,6 +108,12 @@ Route::middleware('auth', 'role:agent')->group(function () {
     Route::post('/store/professional/plan', [PackageController::class, 'StoreProfessionalPlan'])->name('store.professional.plan');
     Route::get('/package/history', [PackageController::class, 'PackageHistory'])->name('package.history');
     Route::get('/agent/package/invoice/{id}', [PackageController::class, 'AgentPackageInvoice'])->name('agent.package.invoice');
+
+
+    Route::get('/agent/property/message/', [AgentMessageController::class,'AgentPropertyMessage'])->name('agent.property.message');
+    Route::get('/agent/message/details/page/{id}', [AgentMessageController::class, 'AgentMessageDetails'])->name('agent.message.details');
+
+
 });
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');
@@ -127,6 +138,12 @@ Route::get('/user/compare', [CompareController::class, 'UserCompare'])->name('us
 Route::get('/get-compare-property', [CompareController::class, 'GetCompareProperty']);
 Route::get('/compare-remove/{id}', [CompareController::class,'CompareRemove']);
 
+Route::get('/agent/details/{id}', [AgentDEtailsController::class, 'AgentDetails'])->name('agent.details');
+Route::post('/agent/details/message', [AgentDEtailsController::class, 'AgentDetailsMessage'])->name('agent.details.message');
+//get all rent property
+Route::get('/rent/property', [AgentDEtailsController::class, 'RentProperty'])->name('rent.property');
+Route::get('/buy/property', [AgentDEtailsController::class, 'BuyProperty'])->name('buy.property');
+Route::get('/property/type/{id}', [AgentPropertyTypeController::class, 'PropertyType'])->name('property.type');
 
 
 

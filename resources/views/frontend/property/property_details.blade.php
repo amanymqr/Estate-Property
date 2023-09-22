@@ -304,12 +304,16 @@
                                         $userData = App\Models\User::find($id);
                                     @endphp
 
-
-                                    <form
-                                        action="{{ route('property.message', ['id' => $property->id, 'agent_id' => $property->agent_id ?: null]) }}"
-                                        method="post" class="default-form">
+                                    <form action="{{ route('property.message') }}" method="post" class="default-form">
                                         @csrf
 
+                                        <input type="hidden" name="property_id" value="{{ $property->id }}">
+
+                                        @if ($property->agent_id == null)
+                                            <input type="hidden" name="agent_id" value="">
+                                        @else
+                                            <input type="hidden" name="agent_id" value="{{ $property->agent_id }}">
+                                        @endif
 
                                         <div class="form-group">
                                             <input type="text" name="msg_name" placeholder="Your name"
@@ -331,9 +335,16 @@
                                         </div>
                                     </form>
                                 @else
-                                    <form
-                                        action="{{ route('property.message', ['id' => $property->id, 'agent_id' => $property->agent_id ?: null]) }}"
-                                        method="post" class="default-form">
+                                    <form action="{{ route('property.message') }}" method="post" class="default-form">
+                                        @csrf
+
+                                        <input type="hidden" name="property_id" value="{{ $property->id }}">
+
+                                        @if ($property->agent_id == null)
+                                            <input type="hidden" name="agent_id" value="">
+                                        @else
+                                            <input type="hidden" name="agent_id" value="{{ $property->agent_id }}">
+                                        @endif
 
                                         <div class="form-group">
                                             <input type="text" name="msg_name" placeholder="Your name" required="">
@@ -357,7 +368,6 @@
 
 
                             </div>
-
 
 
 

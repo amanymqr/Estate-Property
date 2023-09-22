@@ -45,7 +45,7 @@ class HomePropertyController extends Controller
                 ->with('alert-type', 'success');
         } else {
             return redirect()->back()->with('message', 'Plz Login Your Account First')
-                ->with('alert-type', 'error');;
+                ->with('alert-type', 'error');
         }
     }
 
