@@ -21,8 +21,7 @@
                     <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                         <div class="inner-box">
                             <div class="image-box">
-                                <figure class="image"><img src="{{ asset($item->property_thambnail) }}"
-                                        alt="">
+                                <figure class="image"><img src="{{ asset($item->property_thambnail) }}" alt="">
                                 </figure>
                                 <div class="batch"><i class="icon-11"></i></div>
                                 <span class="category">Featured</span>
@@ -55,7 +54,13 @@
                                     </div>
                                     <ul class="other-option pull-right clearfix">
                                         <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                        <li><a href="property-details.html"><i class="icon-13"></i></a></li>
+
+
+                                        {{--  <li><a aria-label="Add To Whishlist" class="action-btn"
+                                                id="{{ $item->id }}" onclick="addToWishList(this.id)"><i class="icon-13"></i></a></li>  --}}
+
+                                        <li><a aria-label="Add To Wishlist" class="action-btn" id="{{ $item->id }}" onclick="addToWishList(this.id)" ><i class="icon-13"></i></a></li>
+
                                     </ul>
                                 </div>
                                 <p>{{ $item->short_descp }}.</p>
@@ -64,7 +69,9 @@
                                     <li><i class="icon-15"></i>{{ $item->bathrooms }} Baths</li>
                                     <li><i class="icon-16"></i>{{ $item->property_size }} Sq Ft</li>
                                 </ul>
-                                <div class="btn-box"><a href="{{ url('property/details/'.$item->id .'/' .$item->property_slug) }}" class="theme-btn btn-two">See
+                                <div class="btn-box"><a
+                                        href="{{ url('property/details/' . $item->id . '/' . $item->property_slug) }}"
+                                        class="theme-btn btn-two">See
                                         Details</a></div>
                             </div>
                         </div>

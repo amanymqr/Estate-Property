@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\AmenitiesController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\HomePropertyController;
 
 /*
@@ -109,6 +110,10 @@ Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name(
 //user front-end all routs
 Route::get('/', [UserController::class, 'index']);
 Route::get('/property/details/{id}/{slug}', [HomePropertyController::class, 'PropertyDetails']);
+Route::post('/add-to-wishList/{property_id}', [WhishlistController::class, 'AddToWishList']);
+Route::get('/user/wishlist', [WhishlistController::class, 'UserWishlist'])->name('user.wishlist');
+Route::get('/get-wishlist-property', [WhishlistController::class, 'GetWishlistProperty']);
+Route::get('/wishlist-remove/{id}', [WhishlistController::class, 'WishlistRemove']);
 
 
 
