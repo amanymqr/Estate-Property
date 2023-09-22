@@ -1,5 +1,5 @@
 @extends('frontend.frontend_dashboard')
-@section('title', 'Real Estat')
+@section('title', 'Wishlist')
 @section('content')
 
 

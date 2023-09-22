@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminPackageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -8,14 +7,16 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ManageAgentController;
+use App\Http\Controllers\HomePropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Agent\PackageController;
 use App\Http\Controllers\Backend\PropertyController;
+use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Backend\AmenitiesController;
+use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
-use App\Http\Controllers\Frontend\WhishlistController;
-use App\Http\Controllers\HomePropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/package/history', [AdminPackageController::class, 'AdminPackageHistory'])->name('admin.package.history');
     Route::get('admin/package/invoice/{id}', [AdminPackageController::class, 'AdminPackageInvoice'])->name('admin.package.invoice');
 });
+
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 
@@ -109,11 +111,21 @@ Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name(
 
 //user front-end all routs
 Route::get('/', [UserController::class, 'index']);
+
 Route::get('/property/details/{id}/{slug}', [HomePropertyController::class, 'PropertyDetails']);
+
+
 Route::post('/add-to-wishList/{property_id}', [WhishlistController::class, 'AddToWishList']);
 Route::get('/user/wishlist', [WhishlistController::class, 'UserWishlist'])->name('user.wishlist');
 Route::get('/get-wishlist-property', [WhishlistController::class, 'GetWishlistProperty']);
 Route::get('/wishlist-remove/{id}', [WhishlistController::class, 'WishlistRemove']);
+
+
+Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
+Route::get('/user/compare', [CompareController::class, 'UserCompare'])->name('user.compare');
+Route::get('/get-compare-property', [CompareController::class, 'GetCompareProperty']);
+Route::get('/compare-remove/{id}', [CompareController::class,'CompareRemove']);
+
 
 
 

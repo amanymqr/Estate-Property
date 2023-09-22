@@ -52,14 +52,16 @@
                                         <h6>Start From</h6>
                                         <h4>{{ $item->lowest_price }}</h4>
                                     </div>
+
                                     <ul class="other-option pull-right clearfix">
-                                        <li><a href="property-details.html"><i class="icon-12"></i></a></li>
+
+                                        {{--   compare  --}}
+                                        <li><a aria-label="Compare" class="action-btn" id="{{ $item->id }}" onclick="addToCompare(this.id)"><i class="icon-12"></i></a></li>
 
 
-                                        {{--  <li><a aria-label="Add To Whishlist" class="action-btn"
-                                                id="{{ $item->id }}" onclick="addToWishList(this.id)"><i class="icon-13"></i></a></li>  --}}
-
-                                        <li><a aria-label="Add To Wishlist" class="action-btn" id="{{ $item->id }}" onclick="addToWishList(this.id)" ><i class="icon-13"></i></a></li>
+                                        {{--  add to wishlist  --}}
+                                        <li><a aria-label="Add To Wishlist" class="action-btn" id="{{ $item->id }}"
+                                                onclick="addToWishList(this.id)"><i class="icon-13"></i></a></li>
 
                                     </ul>
                                 </div>

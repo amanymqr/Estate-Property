@@ -282,6 +282,126 @@
         /// End Wishlist Remove
     </script>
 
+    {{--  add to compar --}}
+    <script type="text/javascript">
+        function addToCompare(property_id) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/add-to-compare/" + property_id,
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+                }
+            })
+
+        }
+    </script>
+
+
+    <!-- // start load Wishlist Data  -->
+
+
+    <script>
+        function compare() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/get-compare-property/",
+                success: function(response) {
+                    var rows = "";
+
+                    $.each(response, function(key, value) {
+                        rows += `
+                        <tr>
+                            <td>
+                                <figure class="image-box"><img src="/${value.property.property_thambnail}" alt=""></figure>
+                            </td>
+                            <td>${value.property.property_name}</td>
+                            <td>${value.property.lowest_price}</td>
+                            <td>${value.property.city}</td>
+                            <td>${value.property.property_size}</td>
+                            <td>${value.property.bedrooms}</td>
+                            <td>${value.property.bathrooms}</td>
+                            <td>
+                                <a type="submit" class="text-body" id="${value.id}" onclick="compareRemove(this.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    `;
+                    });
+
+                    $('#compare').html(rows);
+                }
+            })
+        }
+
+        compare();
+
+        // Compare Remove Start
+
+        function compareRemove(id) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/compare-remove/" + id,
+
+                success: function(data) {
+                    compare();
+
+                    // Start Message
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message
+
+
+                }
+            })
+
+        }
+
+        /// End Compare Remove
+    </script>
 
     @yield('scripts')
 </body><!-- End of .page_wrapper -->

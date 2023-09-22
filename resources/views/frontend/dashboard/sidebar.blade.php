@@ -1,4 +1,3 @@
-
 <div class="widget-content">
     <ul class="category-list ">
 
@@ -12,11 +11,18 @@
                 credits<span class="badge badge-info">( 10 credits)</span></a></li>
         <li><a href="blog-details.html"><i class="fa fa-list-alt" aria-hidden="true"></i></i>
                 Properties </a></li>
+
+
         <li><a href="{{ route('user.wishlist') }}"><i class="fa fa-heart" aria-hidden="true"></i>
                 WishList </a></li>
+
+        <li><a href="{{ route('user.compare') }}"><i class="icon-12" aria-hidden="true"></i>
+                Compare </a></li>
+
+
         <li><a href="{{ route('user.change.password') }}"><i class="fa fa-key" aria-hidden="true"></i> Security
             </a></li>
-        <li><a href="{{ route('user.logout') }}"><i class="fa fa-chevron-circle-up"
-                    aria-hidden="true"></i> Logout </a></li>
+        <li><a href="{{ route('user.logout') }}"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i> Logout </a>
+        </li>
     </ul>
 </div>
