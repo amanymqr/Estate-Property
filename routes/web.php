@@ -113,6 +113,7 @@ Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name(
 Route::get('/', [UserController::class, 'index']);
 
 Route::get('/property/details/{id}/{slug}', [HomePropertyController::class, 'PropertyDetails']);
+Route::post('/property/message', [HomePropertyController::class, 'PropertyMessage'])->name('property.message');
 
 
 Route::post('/add-to-wishList/{property_id}', [WhishlistController::class, 'AddToWishList']);
