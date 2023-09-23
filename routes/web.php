@@ -22,6 +22,7 @@ use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
 use App\Http\Controllers\Frontend\StateDetailsController;
+use App\Http\Controllers\Frontend\SearchPropertyController;
 use App\Http\Controllers\Frontend\AgentPropertyTypeController;
 
 /*
@@ -151,6 +152,8 @@ Route::get('/buy/property', [AgentDEtailsController::class, 'BuyProperty'])->nam
 Route::get('/property/type/{id}', [AgentPropertyTypeController::class, 'PropertyType'])->name('property.type');
 
 Route::get('/state/details/{id}', [StateDetailsController::class, 'StateDetails'])->name('state.details');
+Route::post('/buy/property/search', [SearchPropertyController::class, 'BuyPropertySeach'])->name('buy.property.search');
+Route::post('/rent/property/search', [SearchPropertyController::class, 'RentPropertySeach'])->name('rent.property.search');
 
 
 
