@@ -19,12 +19,15 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Agent\AgentMessageController;
 use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
 use App\Http\Controllers\Frontend\StateDetailsController;
 use App\Http\Controllers\Frontend\SearchPropertyController;
 use App\Http\Controllers\Frontend\AgentPropertyTypeController;
+use App\Models\BlogCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +89,8 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::resource('state', StateController::class);
     Route::resource('testimonial', TestimonialController::class);
+    Route::resource('blog', BlogController::class);
+    Route::resource('post', PostController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
