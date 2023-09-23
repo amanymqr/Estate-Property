@@ -117,11 +117,19 @@
 
                                     <div class="col-sm-3">
                                         <div class="mb-3">
+
                                             <label class="form-label">State</label>
-                                            <input type="text" name="state" value="{{ $property->state }}"
-                                                class="form-control">
+                                            <select name="state" class="form-select" id="exampleFormControlSelect1">
+                                                <option selected="" disabled="">Select State</option>
+                                                @foreach ($property_state as $state)
+                                                    <option value="{{ $state->id }}"
+                                                        {{ $state->id == $property->state ? 'selected' : '' }}>
+                                                        {{ $state->state_name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
+
 
                                     <div class="col-sm-3">
                                         <div class="mb-3">
@@ -328,7 +336,7 @@
                                                                         <div class="image-container" id="deleteForm">
                                                                             {{--  <img src="{{ asset($img->photo_name) }}"
                                                                                 alt="Multi-image">  --}}
-                                                                            <a href="{{ route('admin.multiImg.delete',[ $property->id,  $img->id] ) }}"
+                                                                            <a href="{{ route('admin.multiImg.delete', [$property->id, $img->id]) }}"
                                                                                 class="btn btn-danger">Delete</a>
                                                                         </div>
 

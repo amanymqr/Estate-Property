@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\ManageAgentController;
 use App\Http\Controllers\HomePropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -79,6 +80,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('admin/package/invoice/{id}', [AdminPackageController::class, 'AdminPackageInvoice'])->name('admin.package.invoice');
 
     Route::get('/admin/property/message/', [MessageController::class,'AdminPropertyMessage'])->name('admin.property.message');
+
+    Route::resource('state', StateController::class);
+
 
 });
 

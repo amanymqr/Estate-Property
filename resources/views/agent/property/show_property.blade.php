@@ -60,7 +60,8 @@
                                     </tr>
                                     <tr>
                                         <td>State </td>
-                                        <td><code>{{ $property->state }}</code></td>
+                                        <td><code>{{ $property->property_state->state_name}}</code></td>
+
                                     </tr>
 
                                     <tr>
@@ -146,7 +147,7 @@
                                                 multiple="multiple" data-width="100%">
 
                                                 @foreach ($amenities as $ameni)
-                                                    <option value="{{ $ameni->id }}"
+                                                    <option value="{{ $ameni->name }}"
                                                         {{ in_array($ameni->id, $property_ami) ? 'selected' : '' }}>
                                                         {{ $ameni->amenitis_name }}</option>
                                                 @endforeach

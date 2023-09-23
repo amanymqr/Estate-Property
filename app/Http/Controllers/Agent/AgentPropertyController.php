@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Agent;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\State;
+use App\Models\Package;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\Amenities;
@@ -12,7 +14,6 @@ use App\Models\PropertyType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Package;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -36,6 +37,7 @@ class AgentPropertyController extends Controller
     {
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
+        $property_state = State::latest()->get();
 
         $id = Auth::user()->id;
         $property = User::where('role', 'agent')->where('id', $id)->first();
@@ -45,7 +47,7 @@ class AgentPropertyController extends Controller
         if ($pcount == 1 || $pcount == 7) {
             return redirect()->route('buy.package');
         } else {
-            return view('agent.property.add_pproperty', compact('propertyType', 'amenities'));
+            return view('agent.property.add_pproperty', compact('propertyType', 'amenities' ,'property_state'));
         }
     }
 
@@ -170,6 +172,7 @@ class AgentPropertyController extends Controller
         $multiImage = MultiImage::where('property_id', $id)->get();
         $type = $property->amenities_id;
         $property_ami = explode(',', $type);
+        $property_state = State::latest()->get();
 
         // dd($property_ami);
 
@@ -177,7 +180,7 @@ class AgentPropertyController extends Controller
         $amenities = Amenities::latest()->get();
         $facilities = Facility::where('property_id', $id)->get();
 
-        return view('agent.property.edit_property', compact('property', 'propertyType', 'amenities',  'property_ami', 'multiImage', 'facilities'))
+        return view('agent.property.edit_property', compact('property', 'propertyType', 'amenities',  'property_ami', 'multiImage', 'facilities' , 'property_state'))
             ->with('message', 'Property added successfully')
             ->with('alert-type', 'info');
     }

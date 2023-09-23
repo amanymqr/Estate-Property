@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\State;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\Amenities;
@@ -32,9 +33,11 @@ class PropertyController extends Controller
     public function create()
     {
         $propertyType = PropertyType::latest()->get();
+        $property_state = State::latest()->get();
+
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
-        return view('backend_admin.property.add_property', compact('propertyType', 'amenities', 'activeAgent'));
+        return view('backend_admin.property.add_property', compact('propertyType', 'amenities', 'activeAgent' , 'property_state'));
     }
 
     /**
@@ -157,13 +160,14 @@ class PropertyController extends Controller
         $property_ami = explode(',', $type);
 
         // dd($property_ami);
+        $property_state = State::latest()->get();
 
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
         $facilities = Facility::where('property_id', $id)->get();
 
-        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami', 'multiImage', 'facilities'))
+        return view('backend_admin.property.edit_property', compact('property', 'propertyType', 'amenities', 'activeAgent', 'property_ami', 'multiImage', 'facilities' , 'property_state'))
             ->with('message', 'Property added successfully')
             ->with('alert-type', 'info');
     }
