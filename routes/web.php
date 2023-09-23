@@ -21,6 +21,7 @@ use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
+use App\Http\Controllers\Frontend\StateDetailsController;
 use App\Http\Controllers\Frontend\AgentPropertyTypeController;
 
 /*
@@ -149,7 +150,7 @@ Route::get('/rent/property', [AgentDEtailsController::class, 'RentProperty'])->n
 Route::get('/buy/property', [AgentDEtailsController::class, 'BuyProperty'])->name('buy.property');
 Route::get('/property/type/{id}', [AgentPropertyTypeController::class, 'PropertyType'])->name('property.type');
 
-
+Route::get('/state/details/{id}', [StateDetailsController::class, 'StateDetails'])->name('state.details');
 
 
 
