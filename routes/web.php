@@ -81,11 +81,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/package/history', [AdminPackageController::class, 'AdminPackageHistory'])->name('admin.package.history');
     Route::get('admin/package/invoice/{id}', [AdminPackageController::class, 'AdminPackageInvoice'])->name('admin.package.invoice');
 
-    Route::get('/admin/property/message/', [MessageController::class,'AdminPropertyMessage'])->name('admin.property.message');
+    Route::get('/admin/property/message/', [MessageController::class, 'AdminPropertyMessage'])->name('admin.property.message');
 
     Route::resource('state', StateController::class);
-
-
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
@@ -116,10 +114,8 @@ Route::middleware('auth', 'role:agent')->group(function () {
     Route::get('/agent/package/invoice/{id}', [PackageController::class, 'AgentPackageInvoice'])->name('agent.package.invoice');
 
 
-    Route::get('/agent/property/message/', [AgentMessageController::class,'AgentPropertyMessage'])->name('agent.property.message');
+    Route::get('/agent/property/message/', [AgentMessageController::class, 'AgentPropertyMessage'])->name('agent.property.message');
     Route::get('/agent/message/details/page/{id}', [AgentMessageController::class, 'AgentMessageDetails'])->name('agent.message.details');
-
-
 });
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');
@@ -142,7 +138,7 @@ Route::get('/wishlist-remove/{id}', [WhishlistController::class, 'WishlistRemove
 Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
 Route::get('/user/compare', [CompareController::class, 'UserCompare'])->name('user.compare');
 Route::get('/get-compare-property', [CompareController::class, 'GetCompareProperty']);
-Route::get('/compare-remove/{id}', [CompareController::class,'CompareRemove']);
+Route::get('/compare-remove/{id}', [CompareController::class, 'CompareRemove']);
 
 Route::get('/agent/details/{id}', [AgentDEtailsController::class, 'AgentDetails'])->name('agent.details');
 Route::post('/agent/details/message', [AgentDEtailsController::class, 'AgentDetailsMessage'])->name('agent.details.message');
@@ -152,8 +148,12 @@ Route::get('/buy/property', [AgentDEtailsController::class, 'BuyProperty'])->nam
 Route::get('/property/type/{id}', [AgentPropertyTypeController::class, 'PropertyType'])->name('property.type');
 
 Route::get('/state/details/{id}', [StateDetailsController::class, 'StateDetails'])->name('state.details');
+
 Route::post('/buy/property/search', [SearchPropertyController::class, 'BuyPropertySeach'])->name('buy.property.search');
 Route::post('/rent/property/search', [SearchPropertyController::class, 'RentPropertySeach'])->name('rent.property.search');
+
+//filter rent page
+Route::post('/all/property/search', [SearchPropertyController::class, 'AllPropertySeach'])->name('all.property.search');
 
 
 
