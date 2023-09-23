@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Agent\AgentMessageController;
 use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
 use App\Http\Controllers\Frontend\StateDetailsController;
@@ -84,6 +85,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/property/message/', [MessageController::class, 'AdminPropertyMessage'])->name('admin.property.message');
 
     Route::resource('state', StateController::class);
+    Route::resource('testimonial', TestimonialController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
