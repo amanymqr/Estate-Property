@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\BlogCategory;
 use App\Models\PropertyType;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,10 @@ class BlogPost extends Model
     {
         return $this->belongsTo(BlogCategory::class,'blogcat_id','id');
 
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
 }

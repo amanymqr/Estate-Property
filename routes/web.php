@@ -161,7 +161,10 @@ Route::post('/rent/property/search', [SearchPropertyController::class, 'RentProp
 
 //filter rent page
 Route::post('/all/property/search', [SearchPropertyController::class, 'AllPropertySeach'])->name('all.property.search');
-
+//blog
+Route::get('/blog/details/{slug}', [HomePropertyController::class, 'BlogDetails']);
+Route::get('/blog/cat/list/{id}', [HomePropertyController::class, 'BlogCategoryList']);
+Route::get('/blog', [HomePropertyController::class, 'BlogList'])->name('blog.list');
 
 
 require __DIR__ . '/auth.php';

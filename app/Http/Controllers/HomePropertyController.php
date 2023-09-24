@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\BlogPost;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\MultiImage;
-use App\Models\PropertMessage;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use App\Models\PropertMessage;
 use Illuminate\Support\Facades\Auth;
 
 class HomePropertyController extends Controller
@@ -50,7 +52,29 @@ class HomePropertyController extends Controller
     }
 
 
+    //front blog
+    public function BlogDetails($slug)
+    {
+        $blog = BlogPost::where('post_slug', $slug)->first();
+        $tags = $blog->post_tags;
+        $tags_all = explode(',', $tags);
+        $blog_category = BlogCategory::latest()->get();
+        $blog_post = BlogPost::latest()->limit(3)->get();
+        return view('frontend.blog.blog_details', compact('blog', 'tags_all', 'blog_category', 'blog_post'));
+    }
 
+    public function BlogCategoryList($id){
+        $blog = BlogPost::where('blogcat_id',$id)->get();
+        $bread_category = BlogCategory::where('id',$id)->first();
+        $category = BlogCategory::latest()->get();
+        $blog_post = BlogPost::latest()->limit(3)->get();
+        return view('frontend.blog.blog_category_list', compact('blog','bread_category','category','blog_post'));
+    }
 
-
+    public function BlogList(){
+        $blog = BlogPost::latest()->get();
+        $blog_category = BlogCategory::latest()->get();
+        $blog_post = BlogPost::latest()->limit(3)->get();
+        return view('frontend.blog.blog_list', compact('blog','blog_category','blog_post'));
+    }
 }
