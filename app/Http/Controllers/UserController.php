@@ -15,9 +15,9 @@ class UserController extends Controller
     public function index()
     {
         $property_type = PropertyType::latest()->limit(5)->get();
-        $property_feature = Property::where('status','1')->where('featured','1')->limit(3)->get();
+        $property_feature = Property::where('status', '1')->where('featured', '1')->limit(3)->get();
 
-        return view('frontend.index' , compact('property_type' , 'property_feature' ));
+        return view('frontend.index', compact('property_type', 'property_feature'));
     }
 
 
@@ -84,4 +84,7 @@ class UserController extends Controller
 
         return redirect()->back()->with('message', 'User Password Updated Successfuly!')->with('alert-type', 'info');
     }
+
+
+
 }

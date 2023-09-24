@@ -7,8 +7,11 @@
 
         <li><a href="{{ route('user.profile') }}"><i class="fa fa-cog" aria-hidden="true"></i>
                 Settings</a></li>
-        <li><a href="blog-details.html"><i class="fa fa-credit-card" aria-hidden="true"></i> Buy
-                credits<span class="badge badge-info">( 10 credits)</span></a></li>
+
+        <li><a href="{{ route('user.schedule.request') }}"><i class="fa fa-credit-card" aria-hidden="true"></i>Schedule
+                Request</a></li>
+
+
         <li><a href="blog-details.html"><i class="fa fa-list-alt" aria-hidden="true"></i></i>
                 Properties </a></li>
 

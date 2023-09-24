@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.password.update');
+
+    //schedule
+    Route::get('/user/schedule/request', [ScheduleController::class, 'UserScheduleRequest'])->name('user.schedule.request');
 });
 
 
@@ -132,10 +135,9 @@ Route::middleware('auth', 'role:agent')->group(function () {
     Route::get('/agent/message/details/page/{id}', [AgentMessageController::class, 'AgentMessageDetails'])->name('agent.message.details');
 
     // Schedule agent Route
-    Route::get('/agent/schedule/request/',[ScheduleController::class,'AgentScheduleRequest'])->name('agent.schedule.request');
-    Route::get('/agent/details/schedule/{id}',[ScheduleController::class,'AgentDetailsSchedule'])->name('agent.details.schedule');
-    Route::post('/agent/update/schedule/', [ScheduleController::class,'AgentUpdateSchedule'])->name('agent.update.schedule');
-
+    Route::get('/agent/schedule/request/', [ScheduleController::class, 'AgentScheduleRequest'])->name('agent.schedule.request');
+    Route::get('/agent/details/schedule/{id}', [ScheduleController::class, 'AgentDetailsSchedule'])->name('agent.details.schedule');
+    Route::post('/agent/update/schedule/', [ScheduleController::class, 'AgentUpdateSchedule'])->name('agent.update.schedule');
 });
 
 
@@ -150,13 +152,13 @@ Route::get('/', [UserController::class, 'index']);
 Route::get('/property/details/{id}/{slug}', [HomePropertyController::class, 'PropertyDetails']);
 Route::post('/property/message', [HomePropertyController::class, 'PropertyMessage'])->name('property.message');
 
-
+//wishlist
 Route::post('/add-to-wishList/{property_id}', [WhishlistController::class, 'AddToWishList']);
 Route::get('/user/wishlist', [WhishlistController::class, 'UserWishlist'])->name('user.wishlist');
 Route::get('/get-wishlist-property', [WhishlistController::class, 'GetWishlistProperty']);
 Route::get('/wishlist-remove/{id}', [WhishlistController::class, 'WishlistRemove']);
 
-
+//comoare
 Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
 Route::get('/user/compare', [CompareController::class, 'UserCompare'])->name('user.compare');
 Route::get('/get-compare-property', [CompareController::class, 'GetCompareProperty']);

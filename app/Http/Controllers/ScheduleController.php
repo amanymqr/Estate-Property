@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Schedule;
 use App\Mail\ScheduleMail;
 use App\Mail\SchedualeMail;
@@ -76,5 +77,15 @@ class ScheduleController extends Controller
 
         return redirect()->route('agent.schedule.request')->with('message', 'You have Confirm Schedule Successfully')
             ->with('alert-type', 'success');;
+    }
+
+
+    //Schedule  in user dashboard
+    public function UserScheduleRequest()
+    {
+        $id = Auth::user()->id;
+        $userData = User::find($id);
+        $schedule_request = Schedule::where('user_id', $id)->get();
+        return view('frontend.message.schedule_request', compact('userData', 'schedule_request'));
     }
 }
