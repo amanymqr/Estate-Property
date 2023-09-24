@@ -8,6 +8,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\ManageAgentController;
 use App\Http\Controllers\Backend\BlogController;
@@ -129,7 +130,15 @@ Route::middleware('auth', 'role:agent')->group(function () {
 
     Route::get('/agent/property/message/', [AgentMessageController::class, 'AgentPropertyMessage'])->name('agent.property.message');
     Route::get('/agent/message/details/page/{id}', [AgentMessageController::class, 'AgentMessageDetails'])->name('agent.message.details');
+
+    // Schedule agent Route
+    Route::get('/agent/schedule/request/',[ScheduleController::class,'AgentScheduleRequest'])->name('agent.schedule.request');
+    Route::get('/agent/details/schedule/{id}',[ScheduleController::class,'AgentDetailsSchedule'])->name('agent.details.schedule');
+    Route::post('/agent/update/schedule/', [ScheduleController::class,'AgentUpdateSchedule'])->name('agent.update.schedule');
+
 });
+
+
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');
 
@@ -175,4 +184,6 @@ Route::get('/all-blog', [HomePropertyController::class, 'BlogList'])->name('blog
 //comment
 Route::post('/store/comment', [CommentController::class, 'StoreComment'])->name('store.comment');
 
+//schedule
+Route::post('/store/schedule', [ScheduleController::class, 'StoreSchedule'])->name('store.schedule');
 require __DIR__ . '/auth.php';
