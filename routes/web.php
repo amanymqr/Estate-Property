@@ -27,6 +27,7 @@ use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
 use App\Http\Controllers\Frontend\StateDetailsController;
 use App\Http\Controllers\Frontend\SearchPropertyController;
@@ -108,6 +109,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/site/setting', 'SiteSetting')->name('site.setting');
         Route::post('/update/site/setting', 'UpdateSiteSetting')->name('update.site.setting');
     });
+
+    //permission
+    Route::resource('permission', RoleController::class);
+
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);

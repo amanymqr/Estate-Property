@@ -1,4 +1,6 @@
 @extends('admin.admin_dashboard')
+
+@section('title' , 'Admin Dashboard')
 @section('content')
 
 <div class="page-content">

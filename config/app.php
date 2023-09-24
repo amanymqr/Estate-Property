@@ -186,5 +186,7 @@ return [
         // 'Example' => App\Facades\Example::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
+    Spatie\Permission\PermissionServiceProvider::class,
+
 
 ];
