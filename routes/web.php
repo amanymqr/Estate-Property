@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\HomePropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Agent\PackageController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Frontend\CompareController;
@@ -101,6 +102,12 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/blog/comment', [CommentController::class, 'AdminBlogComment'])->name('admin.blog.comment');
     Route::get('/admin/comment/reply/{id}', [CommentController::class, 'AdminCommentReply'])->name('admin.comment.reply');
     Route::post('/reply/message', [CommentController::class, 'ReplyMessage'])->name('reply.message');
+
+    // Site Setting
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/site/setting', 'SiteSetting')->name('site.setting');
+        Route::post('/update/site/setting', 'UpdateSiteSetting')->name('update.site.setting');
+    });
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
