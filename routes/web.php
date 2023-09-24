@@ -1,13 +1,17 @@
 <?php
 
+use App\Models\BlogCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\Amenities;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\ManageAgentController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\HomePropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Admin\MessageController;
@@ -19,15 +23,12 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Agent\AgentMessageController;
 use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
-use App\Http\Controllers\Backend\BlogController;
-use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
 use App\Http\Controllers\Frontend\StateDetailsController;
 use App\Http\Controllers\Frontend\SearchPropertyController;
 use App\Http\Controllers\Frontend\AgentPropertyTypeController;
-use App\Models\BlogCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,11 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('blog', BlogController::class);
     Route::resource('post', PostController::class);
+
+    //comment
+    Route::get('/admin/blog/comment', [CommentController::class, 'AdminBlogComment'])->name('admin.blog.comment');
+    Route::get('/admin/comment/reply/{id}', [CommentController::class, 'AdminCommentReply'])->name('admin.comment.reply');
+    Route::post('/reply/message', [CommentController::class, 'ReplyMessage'])->name('reply.message');
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
@@ -164,7 +170,9 @@ Route::post('/all/property/search', [SearchPropertyController::class, 'AllProper
 //blog
 Route::get('/blog/details/{slug}', [HomePropertyController::class, 'BlogDetails']);
 Route::get('/blog/cat/list/{id}', [HomePropertyController::class, 'BlogCategoryList']);
-Route::get('/blog', [HomePropertyController::class, 'BlogList'])->name('blog.list');
+Route::get('/all-blog', [HomePropertyController::class, 'BlogList'])->name('blog.list.all');
 
+//comment
+Route::post('/store/comment', [CommentController::class, 'StoreComment'])->name('store.comment');
 
 require __DIR__ . '/auth.php';

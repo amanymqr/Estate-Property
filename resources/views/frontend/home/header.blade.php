@@ -66,7 +66,7 @@
 
                                 <li><a href="{{ url('/') }}"><span>Agent </span></a> </li>
 
-                                <li><a href="{{ route('blog.list') }}"><span>Blog  </span></a> </li>
+                                <li><a href="{{ route('blog.list.all') }}"><span>Blog  </span></a> </li>
 
 
                                 <li><a href="contact.html"><span>Contact</span></a></li>
