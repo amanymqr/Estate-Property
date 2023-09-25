@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="price-filter sidebar-widget">
+                        {{--  <div class="price-filter sidebar-widget">
                             <div class="widget-title">
                                 <h5>Select Price Range</h5>
                             </div>
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="price-range-slider"></div>
                             </div>
-                        </div>
+                        </div>  --}}
                         <div class="category-widget sidebar-widget">
                             <div class="widget-title">
                                 <h5>Status Of Property</h5>

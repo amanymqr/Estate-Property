@@ -5,7 +5,7 @@
         ->limit(5)
         ->get();
 @endphp
-<section class="team-section sec-pad centred bg-color-1">
+<section class="team-section sec-pad centred bg-color-1" id="blog">
     <div class="pattern-layer" style="background-image: url({{ asset('frontendassets/images/shape/shape-1.png') }});">
     </div>
     <div class="auto-container">

@@ -106,7 +106,7 @@
 
 
                         </div>
-                        <div class="price-filter sidebar-widget">
+                        {{--  <div class="price-filter sidebar-widget">
                             <div class="widget-title">
                                 <h5>Select Price Range</h5>
                             </div>
@@ -118,14 +118,14 @@
                                 </div>
                                 <div class="price-range-slider"></div>
                             </div>
-                        </div>
+                        </div>  --}}
                         <div class="category-widget sidebar-widget">
                             <div class="widget-title">
                                 <h5>Status Of Property</h5>
                             </div>
                             <ul class="category-list clearfix">
-                                <li><a href="{{ route('rent.property') }}">For Rent <span>(200)</span></a></li>
-                                <li><a href="{{ route('buy.property') }}">For Buy <span>(700)</span></a></li>
+                                <li><a href="{{ route('rent.property') }}">For Rent <span>()</span></a></li>
+                                <li><a href="{{ route('buy.property') }}">For Buy <span>()</span></a></li>
                             </ul>
                         </div>
 

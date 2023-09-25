@@ -75,7 +75,7 @@
                         @endphp
                         <div class="comments-area">
                             <div class="group-title">
-                                <h4>3 Comments</h4>
+                                <h4>{{ count( $comment) }} Comments</h4>
                             </div>
                             <div class="comment-box">
                                 @foreach ($comment as $com)

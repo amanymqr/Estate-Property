@@ -8,13 +8,13 @@
         <li><a href="{{ route('user.profile') }}"><i class="fa fa-cog" aria-hidden="true"></i>
                 Settings</a></li>
 
-        <li><a href="{{ route('user.schedule.request') }}"><i class="fa fa-credit-card" aria-hidden="true"></i>Schedule
+        <li><a href="{{ route('user.schedule.request') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Schedule
                 Request</a></li>
 
 
-        <li><a href="blog-details.html"><i class="fa fa-list-alt" aria-hidden="true"></i></i>
+        {{--  <li><a href="blog-details.html"><i class="fa fa-list-alt" aria-hidden="true"></i></i>
                 Properties </a></li>
-
+  --}}
 
         <li><a href="{{ route('user.wishlist') }}"><i class="fa fa-heart" aria-hidden="true"></i>
                 WishList </a></li>

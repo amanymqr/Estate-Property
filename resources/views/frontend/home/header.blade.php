@@ -72,18 +72,21 @@
                                     </ul>
                                 </li>
 
-                                <li><a href="{{ url('/') }}"><span>Agent </span></a> </li>
+                                <li><a href="#blog"><span>Agent </span></a> </li>
 
-                                <li><a href="{{ url('/') }}"><span>Blog </span></a> </li>
+                                <li><a href="{{route('blog.list.all') }}"><span>Blog </span></a> </li>
 
 
                                 <li><a href="contact.html"><span>Contact</span></a></li>
-
+                                {{--  @if(auth()->user()->role=='admin')
                                 <li>
-                                    <a href="{{ route('agent.login') }}"
-                                        class="btn btn-success text-white"><span>+</span>Add Listing</a>
+                                    <a href="{{ route('admin.login') }}" class="btn btn-success text-white"><span>+</span>Add Listing</a>
                                 </li>
-
+                            @else(auth()->user()->role=='agen')
+                            <li>
+                                <a href="{{ route('agent.login') }}" class="btn btn-success text-white"><span>+</span>Add Listing</a>
+                            </li>
+@endif  --}}
 
                             </ul>
                         </div>

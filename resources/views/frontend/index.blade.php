@@ -17,9 +17,9 @@
     <!-- feature-section end -->
 
 
-    <!-- video-section -->
+    {{--  <!-- video-section -->
     @include('frontend.home.video')
-    <!-- video-section end -->
+    <!-- video-section end -->  --}}
 
 
     <!-- deals-section -->

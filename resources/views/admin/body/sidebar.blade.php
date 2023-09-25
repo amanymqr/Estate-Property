@@ -2,7 +2,7 @@
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="#" class="sidebar-brand">
-            Admin<span>PAnel</span>
+            Admin<span>Panel</span>
         </a>
         <div class="sidebar-toggler not-active">
             <span></span>
@@ -19,13 +19,16 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
+
+
             <li class="nav-item nav-category">Real Estate</li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#types" role="button" aria-expanded="false"
                     aria-controls="types">
                     <i class="link-icon" data-feather="feather"></i>
+
                     <span class="link-title">Property Type</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
+                    <i class="fa-solid fa-house" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="types">
                     <ul class="nav sub-menu">
@@ -43,7 +46,9 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#state" role="button" aria-expanded="false"
                     aria-controls="emails">
+
                     <i class="link-icon" data-feather="feather"></i>
+
                     <span class="link-title">Property State </span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
@@ -108,7 +113,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#testimonials" role="button"
                     aria-expanded="false" aria-controls="emails">
-                    <i class="link-icon" data-feather="mail"></i>
+                    <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">Testimonials Manage </span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
@@ -188,6 +193,25 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('manage_agent.create') }}" class="nav-link">Add Agent</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents2" role="button"
+                    aria-expanded="false" aria-controls="uiComponents2">
+                    <i class="link-icon" data-feather="feather"></i>
+                    <span class="link-title">Manage User</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="uiComponents2">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('manage_user.index') }}" class="nav-link">All User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('manage_user.create') }}" class="nav-link">Add User</a>
                         </li>
                     </ul>
                 </div>

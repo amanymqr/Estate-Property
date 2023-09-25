@@ -375,7 +375,7 @@
                         </div>
 
 
-                        <div class="calculator-widget sidebar-widget">
+                        {{--  <div class="calculator-widget sidebar-widget">
                             <div class="calculate-inner">
                                 <div class="widget-title">
                                     <h4>Mortgage Calculator</h4>
@@ -410,7 +410,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div>  --}}
                     </div>
                 </div>
             </div>

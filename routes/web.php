@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Backend\AmenitiesController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Agent\AgentMessageController;
 use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
@@ -87,6 +88,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     //Manage Agent from Admin
     Route::resource('manage_agent', ManageAgentController::class);
+    //maange user
+    Route::resource('manage_user', ManageUserController::class);
+
+
     Route::get('/changeStatus', [ManageAgentController::class, 'changeStatus']);
 
     Route::get('/admin/package/history', [AdminPackageController::class, 'AdminPackageHistory'])->name('admin.package.history');
@@ -112,7 +117,6 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     //permission
     Route::resource('permission', RoleController::class);
-
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
