@@ -4,7 +4,7 @@
 
     <!--Page Title-->
     <section class="page-title centred"
-        style="background-image: url({{ asset('frontendassets/images/background/page-title-5.jpg') }});">
+        style="background-image: url({{ asset('frontendas2sets/images/background/page-title-5.jpg') }});">
         <div class="auto-container">
             <div class="content-box clearfix">
                 <h1>User Dashboard </h1>

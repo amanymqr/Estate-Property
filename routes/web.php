@@ -13,22 +13,23 @@ use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\ManageAgentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\HomePropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Agent\PackageController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Backend\AmenitiesController;
 use App\Http\Controllers\Admin\AdminPackageController;
-use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Agent\AgentMessageController;
 use App\Http\Controllers\Frontend\WhishlistController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\PropertyTypeController;
-use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Frontend\AgentDEtailsController;
 use App\Http\Controllers\Frontend\StateDetailsController;
 use App\Http\Controllers\Frontend\SearchPropertyController;
@@ -117,6 +118,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     //permission
     Route::resource('permission', RoleController::class);
+    Route::resource('role', RolePermissionController::class);
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);

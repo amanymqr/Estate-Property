@@ -258,6 +258,10 @@
                             <a href="{{ route('permission.create') }}" class="nav-link">Add  Permission</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ route('role.index') }}" class="nav-link">All Role</a>
+                        </li>
+
                     </ul>
                 </div>
             </li>

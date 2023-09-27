@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,10 @@ class AgentController extends Controller
 {
     public function AgentDashboard()
     {
-        return view('agent.index');
+        $agent = Auth::user();
+        $numProperties = Property::where('agent_id', $agent->id)->count();
+
+        return view('agent.index' , compact('numProperties'));
     }
 
     public function AgentLogin()
